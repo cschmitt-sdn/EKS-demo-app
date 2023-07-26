@@ -657,17 +657,17 @@ opentelemetry-collector:
             - 'name == "queueSize"'
 
     connectors:
-      spanmetrics:
-        namespace: span.metrics
+    #  spanmetrics:
+    #    namespace: span.metrics
 
     service:
       pipelines:
         traces:
           receivers: [otlp]
           processors: [memory_limiter, batch]
-          exporters: [otlp, logging, spanmetrics]
+          exporters: [otlp, logging]
         metrics:
-          receivers: [otlp, spanmetrics]
+          receivers: [otlp]
           processors: [memory_limiter, filter/ottl, transform, batch]
           exporters: [prometheus, logging]
 
